@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The to do app</title>
+</head>
+<body>
+<div class="List of tasks">
+    <h3>Your Tasks To Do</h3>
+    <p>Your current list of tasks is as follows: </p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <table cellspacing="15">
+        <tr>
+            <th> <strong> Task ID </strong></th>
+            <th> <strong> Task Category </strong></th>
+            <th> <strong> Task Description </strong></th>
+            <th> <strong> Task Status </strong></th>
+        </tr>
+         {% for task in tasks %}
+        <tr>
+            <td>{{ task["id"] }} </td>
+            <td>{{ task["category"] }}</td>
+            <td>{{ task["description"] }}</td>
+            <td>{{ task["status"] }}</td>
+        </tr>
+         {% endfor %}
+     </table>
+</div>
+    <h2>Do you want to do add a new task?</h2>
+    <p>Please enter task category and description below</p>
+<div class="Add task">
+    <form action="/add_task" method="post">
+        <input name="category" placeholder="Write task's category here">
+        <input name="description" placeholder="Write task here">
+            <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
